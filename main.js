@@ -58,3 +58,57 @@ for (let i = 0; i < arrText.length; i++) {
 
 let rus = document.querySelectorAll('.rus')
 let eng = document.querySelectorAll('.eng')
+
+
+for (let i = 0; i < rus.length; i++) {
+    let span = document.createElement('span');
+    let span1 = document.createElement('span');
+
+    isEng ? span.classList.add('caseDown', 'hidden') : span.classList.add('caseDown')
+
+    span1.classList.add('caseUp', 'hidden')
+    span.innerHTML = rusData[i];
+    span1.innerHTML = rusData[i];
+
+    if (rusData[i].search(/[а-я]/) != -1 && rusData[i].length == 1) {
+
+        span1.innerHTML = rusData[i].toUpperCase();
+    }
+
+    rus[i].append(span)
+    rus[i].append(span1)
+
+}
+
+for (let i = 0; i < eng.length; i++) {
+    let span = document.createElement('span');
+    let span1 = document.createElement('span');
+
+    isEng ? span.classList.add('caseDown') : span.classList.add('caseDown', 'hidden')
+
+    span1.classList.add('caseUp', 'hidden')
+    span.innerHTML = arrText[i]
+    span1.innerHTML = arrText[i]
+    if (arrText[i].search(/[a-z]/) != -1 && arrText[i].length == 1) {
+
+        span1.innerHTML = arrText[i].toUpperCase();
+    }
+
+    eng[i].append(span)
+    eng[i].append(span1)
+}
+
+let item = document.querySelectorAll('.item');
+
+for (let i = 0; i < item.length; i++) {
+
+    item[i].classList[1] == 'ArrowUp' ? item[i].innerHTML = '<span class="rus hidden"><span class="caseDown hidden">▲</span><span class="caseUp hidden">▲</span></span><span class="eng"><span class="caseDown">▲</span><span class="caseUp hidden">▲</span></span>' : null;
+    item[i].classList[1] == 'ArrowDown' ? item[i].innerHTML = '<span class="rus hidden"><span class="caseDown hidden">▼</span><span class="caseUp hidden">▼</span></span><span class="eng"><span class="caseDown">▼</span><span class="caseUp hidden">▼</span></span>' : null;
+    item[i].classList[1] == 'ArrowLeft' ? item[i].innerHTML = '<span class="rus hidden"><span class="caseDown hidden">◄</span><span class="caseUp hidden">◄</span></span><span class="eng"><span class="caseDown">◄</span><span class="caseUp hidden">◄</span></span>' : null;
+    item[i].classList[1] == 'ArrowRight' ? item[i].innerHTML = '<span class="rus hidden"><span class="caseDown hidden">►</span><span class="caseUp hidden">►</span></span><span class="eng"><span class="caseDown">►</span><span class="caseUp hidden">►</span></span>' : null;
+    item[i].classList[1] == 'AltRight' ? item[i].innerHTML = '<span class="rus hidden"><span class="caseDown hidden">Alt</span><span class="caseUp hidden">Alt</span></span><span class="eng"><span class="caseDown">Alt</span><span class="caseUp hidden">Alt</span></span>' : null;
+    item[i].classList[1] == 'ControlLeft' ? item[i].innerHTML = '<span class="rus hidden"><span class="caseDown hidden">Ctrl</span><span class="caseUp hidden">Ctrl</span></span><span class="eng"><span class="caseDown">Ctrl</span><span class="caseUp hidden">Ctrl</span></span>' : null;
+    item[i].classList[1] == 'ControlRight' ? item[i].innerHTML = '<span class="rus hidden"><span class="caseDown hidden">Ctrl</span><span class="caseUp hidden">Ctrl</span></span><span class="eng"><span class="caseDown">Ctrl</span><span class="caseUp hidden">Ctrl</span></span>' : null;
+    item[i].classList[1] == 'Win' ? item[i].innerHTML = '<span class="rus hidden"><span class="caseDown hidden">Win</span><span class="caseUp hidden">Win</span></span><span class="eng"><span class="caseDown">Win</span><span class="caseUp hidden">Win</span></span>' : null;
+    item[i].classList[1] == 'Space' ? item[i].innerHTML = '<span class="rus hidden"><span class="caseDown hidden"></span><span class="caseUp hidden"></span></span><span class="eng"><span class="caseDown"></span><span class="caseUp hidden"></span></span>' : null;
+}
