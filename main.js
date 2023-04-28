@@ -112,3 +112,55 @@ for (let i = 0; i < item.length; i++) {
     item[i].classList[1] == 'Win' ? item[i].innerHTML = '<span class="rus hidden"><span class="caseDown hidden">Win</span><span class="caseUp hidden">Win</span></span><span class="eng"><span class="caseDown">Win</span><span class="caseUp hidden">Win</span></span>' : null;
     item[i].classList[1] == 'Space' ? item[i].innerHTML = '<span class="rus hidden"><span class="caseDown hidden"></span><span class="caseUp hidden"></span></span><span class="eng"><span class="caseDown"></span><span class="caseUp hidden"></span></span>' : null;
 }
+
+let capsLock = document.querySelector('.CapsLock');
+
+//Нажатия клавиши клавиатуры
+
+function keyDown(event) {
+
+    let eventCodeElement = document.querySelector(`.${event.code}`);
+    if (arrData.indexOf(event.code) != -1) {
+        event.code != 'CapsLock'
+            ? eventCodeElement.classList.add('push')
+            : capsLock.classList.toggle('push')
+    }
+
+
+    if (!event.repeat) {
+        if (event.code == 'CapsLock' || event.code == 'ShiftLeft') {
+            for (let i = 0; i < item.length; i++) {
+                eng[i].children[0].classList.toggle('hidden');
+                eng[i].children[1].classList.toggle('hidden');
+                rus[i].children[0].classList.toggle('hidden');
+                rus[i].children[1].classList.toggle('hidden');
+            }
+        }
+    }
+    if (event.code == 'Tab' || event.code == 'AltLeft' || event.code == 'MetaLeft') {
+        event.preventDefault();
+    }
+}
+
+function keyUp(event) {
+
+    if (arrData.indexOf(event.code) != -1) {
+
+        event.code == 'CapsLock' ? null : document.querySelector(`.${event.code}`).classList.remove('push');
+    }
+
+    if (event.code == 'ShiftLeft') {
+
+        for (let i = 0; i < item.length; i++) {
+            let k = 0;
+            while (k < 2) {
+                eng[i].children[k].classList.toggle('hidden');
+                rus[i].children[k].classList.toggle('hidden');
+                k++;
+            }
+        }
+    }
+}
+
+document.onkeydown = keyDown;
+document.onkeyup = keyUp;
