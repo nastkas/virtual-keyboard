@@ -140,6 +140,35 @@ function keyDown(event) {
     if (event.code == 'Tab' || event.code == 'AltLeft' || event.code == 'MetaLeft') {
         event.preventDefault();
     }
+
+    // Переключение языка
+
+    if (event.ctrlKey && event.altKey && !event.repeat) {
+
+        !isEng ? isEng = true : isEng = false;
+        localStorage.setItem('isEng', JSON.stringify(isEng))
+
+        for (let i = 0; i < eng.length; i++) {
+            eng[i].classList.toggle('hidden');
+            rus[i].classList.toggle('hidden');
+            rus[i].children[0].classList.toggle('hidden');
+            eng[i].children[0].classList.toggle('hidden');
+        }
+    }
+
+    // Вывод текста
+
+    if (arrData.indexOf(event.code) != -1) {
+        for (let i = 0; i < eventCodeElement.children.length; i++) {
+            if (eventCodeElement.children[i].classList.length == 1 && event.key.length == 1 && event.code != 'Space') {
+                event.preventDefault();
+                if (eventCodeElement.children[i].children[0].classList.length == 1) {
+                    textarea.value += eventCodeElement.children[i].children[0].innerHTML
+                }
+                else textarea.value += eventCodeElement.children[i].children[1].innerHTML
+            }
+        }
+    }
 }
 
 function keyUp(event) {
