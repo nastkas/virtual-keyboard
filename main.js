@@ -115,6 +115,9 @@ for (let i = 0; i < item.length; i++) {
 
 let capsLock = document.querySelector('.CapsLock');
 
+append('div', 'keyboard-info', '.wrapper');
+document.querySelector('.keyboard-info').innerHTML = 'ОС Windows.<br> Переключить язык: левыe CTR+ALT'
+
 //Нажатия клавиши клавиатуры
 
 function keyDown(event) {
