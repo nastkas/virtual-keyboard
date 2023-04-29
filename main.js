@@ -126,7 +126,6 @@ function keyDown(event) {
             : capsLock.classList.toggle('push')
     }
 
-
     if (!event.repeat) {
         if (event.code == 'CapsLock' || event.code == 'ShiftLeft') {
             for (let i = 0; i < item.length; i++) {
@@ -193,3 +192,65 @@ function keyUp(event) {
 
 document.onkeydown = keyDown;
 document.onkeyup = keyUp;
+
+// мышь
+
+for (let i = 0; i < item.length; i++) {
+    item[i].onmouseover = (event) => {
+        event.currentTarget.classList.add('hover')
+    }
+    item[i].onmouseout = (event) => {
+        event.currentTarget.classList.remove('hover')
+    }
+    item[i].onmousedown = (event) => {
+        event.currentTarget.classList.add('push')
+
+
+        for (let i = 0; i < event.currentTarget.children.length; i++) {
+
+            let rusEng = event.currentTarget.children[i];
+
+            if (rusEng.classList.length == 1 && rusEng.children[0].innerHTML.length == 1) {
+
+                if (rusEng.children[0].classList.length == 1) {
+                    textarea.value += rusEng.children[0].innerHTML
+                }
+                else textarea.value += rusEng.children[1].innerHTML
+            }
+            else if (event.currentTarget.classList[1] == 'Enter') {
+                textarea.value += '\n'
+            }
+            else if (event.currentTarget.classList[1] == 'Tab') {
+                textarea.value += '\t'
+            }
+
+        }
+        if (event.currentTarget.classList[1] == 'CapsLock' || event.currentTarget.classList[1] == 'ShiftLeft') {
+
+            for (let i = 0; i < item.length; i++) {
+                let k = 0;
+                while (k < 2) {
+                    eng[i].children[k].classList.toggle('hidden');
+                    rus[i].children[k].classList.toggle('hidden');
+                    k++;
+                }
+            }
+        }
+    }
+
+    item[i].onmouseup = (event) => {
+        event.currentTarget.classList.remove('push')
+
+        if (event.currentTarget.classList[1] == 'ShiftLeft') {
+
+            for (let i = 0; i < item.length; i++) {
+                let k = 0;
+                while (k < 2) {
+                    eng[i].children[k].classList.toggle('hidden');
+                    rus[i].children[k].classList.toggle('hidden');
+                    k++;
+                }
+            }
+        }
+    }
+}
